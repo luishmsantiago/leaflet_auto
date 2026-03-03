@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table2Geo Web - Otimizado</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        @import url('style.css');
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>📍 Table2Geo Web</h2>
+        
+        <div>
+            <label>1. Carregar Planilha (.xlsx, .csv)</label>
+            <input type="file" id="fileInput" accept=".xlsx, .csv" />
+        </div>
+
+        <div>
+            <label>Coluna de Descrição (Popup):</label>
+            <select id="colDesc"><option value="">-- Carregue o arquivo --</option></select>
+        </div>
+
+        <div class="aba-container">
+            <div class="aba ativa" onclick="mudarAba('wkt')">Usar WKT</div>
+            <div class="aba" onclick="mudarAba('api')">Usar Endereço</div>
+        </div>
+
+        <div id="painel-wkt" class="painel ativo">
+            <label>Coluna de Geometria (WKT):</label>
+            <select id="colWkt"><option value="">-- Nenhuma --</option></select>
+        </div>
+
+        <div id="painel-api" class="painel">
+            <label>Coluna de Endereço:</label>
+            <select id="colEndereco"><option value="">-- Nenhuma --</option></select>
+        </div>
+
+        <div>
+            <label>3. Tipo de Geometria:</label>
+            <select id="tipoGeo">
+                <option value="Point">Ponto (Point)</option>
+                <option value="LineString">Rua Completa (LineString)</option>
+                <option value="Polygon">Área/Bairro (Polygon)</option>
+            </select>
+        </div>
+
+        <button onclick="gerarMapa()">GERAR MAPA</button>
+        <div id="status">Aguardando arquivo...</div>
+
+      <button onclick="downloadMapa()" style="background-color: #3b5998; margin-top: 10px;">BAIXAR MAPA HTML</button>    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <script src="https://unpkg.com/terraformer@1.0.12/terraformer.js"></script>
+    <script src="https://unpkg.com/terraformer-wkt-parser@1.2.1/terraformer-wkt-parser.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
